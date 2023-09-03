@@ -13,7 +13,7 @@ public:
         std::unordered_map<int, int> complements{ {target - nums.front(), 0} }; // complement value -> position
         for (auto i = 1ul, end = nums.size(); i < end; i++)
         {
-            const auto it = complements.find(nums[i]);
+            const auto it{ complements.find(nums[i]) };
 
             if (it != complements.end())
             {
