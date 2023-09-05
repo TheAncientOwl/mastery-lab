@@ -20,6 +20,8 @@ target_link_libraries(Leetcode_${problem_name} PRIVATE
     gtest_main
 )
 
+target_include_directories(Leetcode_${problem_name} PRIVATE \${CMAKE_CURRENT_SOURCE_DIR}/../common)
+
 include(GoogleTest)
 gtest_discover_tests(Leetcode_${problem_name})" > CMakeLists.txt
 
@@ -30,7 +32,6 @@ TEST(Leetcode_${problem_name}, test01)
 {
 
 }
-
 " > Solution.cpp
 
 # README.md
