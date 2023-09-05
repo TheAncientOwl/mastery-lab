@@ -1,7 +1,6 @@
 file(GLOB SOURCE_FILES *.cpp)
 add_executable(Leetcode_138_copy_list_with_random_pointer ${SOURCE_FILES})
 
-
 target_link_libraries(Leetcode_138_copy_list_with_random_pointer PRIVATE
     gtest
     gtest_main
