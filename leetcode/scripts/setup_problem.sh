@@ -35,7 +35,29 @@ TEST(Leetcode_${problem_name}, test01)
 " > Solution.cpp
 
 # README.md
-touch README.md
+echo "## {Title}
+#### {problem link}
+
+{Content}
+
+### Example 1:
+\`\`\`
+Input: 
+Output: 
+Explanation: 
+\`\`\`
+
+### Example 2:
+\`\`\`
+Input: 
+Output: 
+Explanation: 
+\`\`\`
+
+### Constaints:
+*
+*
+*" > README.md
 
 # Go back
 cd ../..
