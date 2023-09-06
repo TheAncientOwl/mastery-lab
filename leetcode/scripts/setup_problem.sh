@@ -33,6 +33,7 @@ add_executable(Leetcode_${problem_id} \${SOURCE_FILES})
 target_link_libraries(Leetcode_${problem_id} PRIVATE
     gtest
     gtest_main
+    Leetcode_Common
 )
 
 target_include_directories(Leetcode_${problem_id} PRIVATE \${CMAKE_CURRENT_SOURCE_DIR}/../common)

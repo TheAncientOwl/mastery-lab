@@ -4,6 +4,7 @@ add_executable(Leetcode_0001_two_sum ${SOURCE_FILES})
 target_link_libraries(Leetcode_0001_two_sum PRIVATE
     gtest
     gtest_main
+    Leetcode_Common
 )
 
 include(GoogleTest)
