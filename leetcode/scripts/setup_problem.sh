@@ -1,12 +1,15 @@
 # /bin/bash
-if [ ! $# -eq 2  ]; then
-    echo ">> Missing leetcode problem number nor problem url"
-    echo ">> Usage: ./setup_problem 1 https://leetcode.com/problems/two-sum/"
+if [ ! $# -eq 3  ]; then
+    echo ">> Missing leetcode problem number nor problem url nor difficulty"
+    echo ">> Usage: ./setup_problem 1 https://leetcode.com/problems/two-sum/ hard"
     exit 1
 fi
 
 problem_number=$(printf "%04d" "$1")
 problem_url=$2
+problem_difficulty=$3
+
+problem_difficulty=$(echo "$problem_difficulty" | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2));}1')
 
 raw_problem_name=$(echo "$problem_url" | grep -oP "https://leetcode.com/problems/\K[^/]+")
 if [ -z "$raw_problem_name" ]; then
@@ -52,7 +55,7 @@ TEST(Leetcode_${problem_id}, test01)
 }" > Solution.cpp
 
 # README.md
-echo "## $1. ${problem_title}
+echo "## $1. ${problem_title} ~ ${problem_difficulty}
 #### ${problem_url}
 
 
