@@ -51,7 +51,7 @@ TEST(Leetcode_${problem_id}, test01)
 }" > Solution.cpp
 
 # README.md
-echo "## ${problem_number}. ${problem_title}
+echo "## $1. ${problem_title}
 #### ${problem_url}
 
 
