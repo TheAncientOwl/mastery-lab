@@ -22,7 +22,7 @@ public:
     }
 };
 
-TEST(Leetcode_009_palindrome_number, test01)
+TEST(Leetcode_0009_palindrome_number, test01)
 {
     const int in = 121;
     const bool expected = true;
@@ -31,7 +31,7 @@ TEST(Leetcode_009_palindrome_number, test01)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_009_palindrome_number, test02)
+TEST(Leetcode_0009_palindrome_number, test02)
 {
     const int in = -121;
     const bool expected = false;
@@ -40,7 +40,7 @@ TEST(Leetcode_009_palindrome_number, test02)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_009_palindrome_number, test03)
+TEST(Leetcode_0009_palindrome_number, test03)
 {
     const int in = 10;
     const bool expected = false;
@@ -49,7 +49,7 @@ TEST(Leetcode_009_palindrome_number, test03)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_009_palindrome_number, test04)
+TEST(Leetcode_0009_palindrome_number, test04)
 {
     const int in = 1111;
     const bool expected = true;
@@ -58,7 +58,7 @@ TEST(Leetcode_009_palindrome_number, test04)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_009_palindrome_number, test05)
+TEST(Leetcode_0009_palindrome_number, test05)
 {
     const int in = 1231;
     const bool expected = false;
@@ -67,7 +67,7 @@ TEST(Leetcode_009_palindrome_number, test05)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_009_palindrome_number, test06)
+TEST(Leetcode_0009_palindrome_number, test06)
 {
     const int in = 21120;
     const bool expected = false;
@@ -76,7 +76,7 @@ TEST(Leetcode_009_palindrome_number, test06)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_009_palindrome_number, test07)
+TEST(Leetcode_0009_palindrome_number, test07)
 {
     const int in = 0;
     const bool expected = true;

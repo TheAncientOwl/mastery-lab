@@ -1,5 +1,5 @@
 add_subdirectory(common)
 
-add_subdirectory(001_two_sum)
-add_subdirectory(009_palindrome_number)
-add_subdirectory(138_copy_list_with_random_pointer)
+add_subdirectory(0001_two_sum)
+add_subdirectory(0009_palindrome_number)
+add_subdirectory(0138_copy_list_with_random_pointer)

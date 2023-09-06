@@ -29,7 +29,7 @@ public:
     }
 };
 
-TEST(Leetcode_001_two_sum, test01)
+TEST(Leetcode_0001_two_sum, test01)
 {
     const std::vector<int> in{ 2, 7, 11, 15 };
     const int target{ 9 };
@@ -41,7 +41,7 @@ TEST(Leetcode_001_two_sum, test01)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_001_two_sum, test02)
+TEST(Leetcode_0001_two_sum, test02)
 {
     const std::vector<int> in{ 3, 2, 4 };
     const int target{ 6 };
@@ -53,7 +53,7 @@ TEST(Leetcode_001_two_sum, test02)
     EXPECT_EQ(out, expected);
 }
 
-TEST(Leetcode_001_two_sum, test03)
+TEST(Leetcode_0001_two_sum, test03)
 {
     const std::vector<int> in{ 3, 3 };
     const int target{ 6 };
