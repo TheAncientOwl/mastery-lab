@@ -48,7 +48,7 @@ echo "#include <gtest/gtest.h>
 
 TEST(Leetcode_${problem_id}, test01)
 {
-
+    // Test it on ${problem_url}... :)
 }" > Solution.cpp
 
 # README.md
