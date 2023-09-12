@@ -52,7 +52,9 @@ for query in queries:
             ["<code>", ""],
             ["</code>", ""],
             ["```", "\n```"],
-            ["\n\n```", "\n```"]
+            ["\n\n```", "\n```"],
+            ["```", "```\n"],
+            ["```\n\n", "```\n"]
         ]
 
         question["content"] = data["question"]["content"]
