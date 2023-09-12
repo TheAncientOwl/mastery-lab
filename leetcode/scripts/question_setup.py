@@ -47,7 +47,12 @@ for query in queries:
             ['<p><strong class="example">', "<h3>"],
             ["</strong></p>", "</h3>"],
             ["\n\n\n", "\n\n"],
-            ["<p>&nbsp;</p>", ""]
+            ["<p>&nbsp;</p>", ""],
+            ["&quot;", ""],
+            ["<code>", ""],
+            ["</code>", ""],
+            ["```", "\n```"],
+            ["\n\n```", "\n```"]
         ]
 
         question["content"] = data["question"]["content"]
