@@ -60,6 +60,22 @@ for query in queries:
         question["content"] = data["question"]["content"]
         for [old, new] in old_to_new:
             question["content"] = question["content"].replace(old, new)
+    elif key == "questionEditorData":
+        snippets = data["question"]["codeSnippets"]
+        question["snippet"] = "EMPTY"
+        for snippet in snippets:
+            if snippet["lang"] == "C++":
+                question["snippet"] = snippet["code"]
+                break
+
+        stl_identifiers = ["vector"]
+        question["includes"] = "\n"
+        for stl in stl_identifiers:
+            if stl in question["snippet"]:
+                question["snippet"] = question["snippet"].replace(
+                    stl, f"std::{stl}")
+                question["includes"] += f"#include <{stl}>\n"
+
 
 # complete paths
 question["paths"] = {}
@@ -121,8 +137,9 @@ print(">> Creating Solution.cpp...")
 with open(question["paths"]["cpp"], "w") as cpp_file:
     cpp_file.writelines(line + '\n' for line in [
         '#include <gtest/gtest.h>',
-        '\n\n',
-        f'TEST({question["leetcode_identifier"]}, test01)',
+        question["includes"],
+        question["snippet"],
+        f'\nTEST({question["leetcode_identifier"]}, test01)',
         '{',
         f'    // Test it on {question["url"]}... :)',
         '}'
