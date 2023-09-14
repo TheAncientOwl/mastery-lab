@@ -68,7 +68,7 @@ for query in queries:
                 question["snippet"] = snippet["code"]
                 break
 
-        stl_identifiers = ["vector"]
+        stl_identifiers = ["vector", "string"]
         question["includes"] = "\n"
         for stl in stl_identifiers:
             if stl in question["snippet"]:
