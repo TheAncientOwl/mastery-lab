@@ -37,24 +37,18 @@ for query in queries:
         question["leetcode_identifier"] = f"Leetcode_{question['directory_identifier']}"
     elif key == "questionContent":
         old_to_new = [
-            ["<pre>", "```"],
-            ["```", "\n```"],
-            ["</pre>", "```"],
-            ["<strong>Input:</strong>", "Input:"],
+            ["&quot;", ""],
+            ["<code>", ""],
+            ["</code>", ""],
+
+            ["</pre>", "</code></pre>"],
+            ["<strong>Input:</strong>", "<code>Input:"],
             ["<strong>Output:</strong>", "Output:"],
             ["<strong>Explanation:</strong>", "Explanation"],
             ["<p><strong>", "<h3>"],
             ['<p><strong class="example">', "<h3>"],
             ["</strong></p>", "</h3>"],
-            ["\n\n\n", "\n\n"],
             ["<p>&nbsp;</p>", ""],
-            ["&quot;", ""],
-            ["<code>", ""],
-            ["</code>", ""],
-            ["```", "\n```"],
-            ["\n\n```", "\n```"],
-            ["```", "```\n"],
-            ["```\n\n", "```\n"]
         ]
 
         question["content"] = data["question"]["content"]
