@@ -38,9 +38,6 @@ for query in queries:
     elif key == "questionContent":
         old_to_new = [
             ["&quot;", ""],
-            ["<code>", ""],
-            ["</code>", ""],
-
             ["</pre>", "</code></pre>"],
             ["<strong>Input:</strong>", "<code>Input:"],
             ["<strong>Output:</strong>", "Output:"],
