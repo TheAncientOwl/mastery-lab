@@ -51,6 +51,7 @@ for query in queries:
         question["content"] = data["question"]["content"]
         for [old, new] in old_to_new:
             question["content"] = question["content"].replace(old, new)
+
     elif key == "questionEditorData":
         snippets = data["question"]["codeSnippets"]
         question["snippet"] = "EMPTY"
