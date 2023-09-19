@@ -8,6 +8,6 @@ fi
 echo ">> Fetching url..."
 wget -q -P .tmp $1
 
-python "leetcode/scripts/question_setup.py" $1
+python3 "leetcode/scripts/question_setup.py" $1
 
 rm -rf .tmp
