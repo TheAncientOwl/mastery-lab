@@ -5,24 +5,6 @@
 class Solution
 {
 public:
-    int getMin(const std::vector<int>& nums1, std::size_t& i1, const std::vector<int>& nums2, std::size_t& i2)
-    {
-        if (i1 < nums1.size() && i2 < nums2.size())
-        {
-            return nums1[i1] < nums2[i2] ? nums1[i1++] : nums2[i2++];
-        }
-        else if (i1 < nums1.size())
-        {
-            return nums1[i1++];
-        }
-        else if (i2 < nums2.size())
-        {
-            return nums2[i2++];
-        }
-
-        return -1;
-    }
-
     double findMedianSortedArrays(const std::vector<int>& nums1, const std::vector<int>& nums2)
     {
         const auto c_total_size{ nums1.size() + nums2.size() };
@@ -48,6 +30,25 @@ public:
         }
 
         return out;
+    }
+
+private:
+    int getMin(const std::vector<int>& nums1, std::size_t& i1, const std::vector<int>& nums2, std::size_t& i2)
+    {
+        if (i1 < nums1.size() && i2 < nums2.size())
+        {
+            return nums1[i1] < nums2[i2] ? nums1[i1++] : nums2[i2++];
+        }
+        else if (i1 < nums1.size())
+        {
+            return nums1[i1++];
+        }
+        else if (i2 < nums2.size())
+        {
+            return nums2[i2++];
+        }
+
+        return -1;
     }
 };
 
