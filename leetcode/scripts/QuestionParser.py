@@ -7,11 +7,8 @@ import requests
 class QuestionParser:
     def __init__(self, url) -> None:
         self.data = {}
-
         self.data["url"] = url
         self.queries = []
-
-        pass
 
     def fetch_data(self) -> None:
         print(">> Parsing html...")
