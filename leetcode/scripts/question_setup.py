@@ -92,20 +92,20 @@ os.makedirs(question["paths"]["directory"], exist_ok=True)
 
 # complete files
 print(">> Completing leetcode/CMakeLists.txt")
-with open(question["paths"]["main_cmake"], "a+") as cmake_file:
-    found = False
-
+first_line = ""
+lines = []
+with open(question["paths"]["main_cmake"], "r") as leetcode_cmake_file:
     subdirectory = f'add_subdirectory({question["directory_identifier"]})\n'
+    lines = leetcode_cmake_file.readlines()
+    first_line = lines[0]
+    lines = lines[1:]
+    lines.append(subdirectory)
+    lines = list(set(lines))
+    lines.sort()
 
-    with open(question["paths"]["main_cmake"], "r") as dummy:
-        lines = dummy.readlines()
-        for line in lines:
-            if line == subdirectory:
-                found = True
-                break
-
-    if not found:
-        cmake_file.write(subdirectory)
+with open(question["paths"]["main_cmake"], "w") as leetcode_cmake_file:
+    leetcode_cmake_file.write(first_line)
+    leetcode_cmake_file.writelines(lines)
 
 print(">> Creating CMakeLists.txt...")
 with open(question["paths"]["cmake"], "w") as cmake_file:
