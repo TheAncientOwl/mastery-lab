@@ -130,8 +130,8 @@ int main()
 """
         )
 
-    # Replace dashes with underscores for CMake project and executable names
-    cmake_slug = slug.replace("-", "_")
+    # Replace dashes with underscores for CMake project and executable names, prefix with problem id
+    cmake_slug = f"{problem.id}_{slug.replace('-', '_')}"
     with open(f"{folder_name}/CMakeLists.txt", "w", encoding="utf-8") as f:
         f.write(
             f"""cmake_minimum_required(VERSION 3.20)
