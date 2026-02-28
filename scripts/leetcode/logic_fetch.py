@@ -110,12 +110,15 @@ if __name__ == "__main__":
     slug = url.strip("/").split("/")[4]
     problem = get_problem(slug)
 
-    os.mkdir(f"leetcode-v2/{slug}")
+    folder_name = f"leetcode/{problem.id}-{slug}"
+    os.mkdir(folder_name)
 
-    with open(f"leetcode-v2/{slug}/README.md", "w", encoding="utf-8") as f:
+    with open(f"{folder_name}/README.md", "w", encoding="utf-8") as f:
         f.write(problem.readme)
 
-    with open(f"leetcode-v2/{slug}/Solution.cpp", "w", encoding="utf-8") as f:
+    with open(f"{folder_name}/Solution.cpp", "w", encoding="utf-8") as f:
+
+        f.write('#include "testing.hpp"\n')
         f.write(problem.code_snippet)
         f.write(
             """
@@ -127,4 +130,28 @@ int main()
 """
         )
 
-    print(f"✅ {problem_name} saved to leetcode-v2/{slug}")
+    # Replace dashes with underscores for CMake project and executable names
+    cmake_slug = slug.replace("-", "_")
+    with open(f"{folder_name}/CMakeLists.txt", "w", encoding="utf-8") as f:
+        f.write(
+            f"""cmake_minimum_required(VERSION 3.20)
+
+project({cmake_slug} LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable({cmake_slug}
+    Solution.cpp
+)
+
+# Include shared testing utilities
+target_include_directories({cmake_slug}
+    PRIVATE
+        ${{CMAKE_CURRENT_SOURCE_DIR}}/../common
+)
+"""
+        )
+
+    print(f"✅ {problem_name} saved to {folder_name}")

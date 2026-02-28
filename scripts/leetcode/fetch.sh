@@ -7,4 +7,4 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-.venv/bin/python3 scripts/logic_fetch_leetcode.py "$1"
+.venv/bin/python3 scripts/leetcode/logic_fetch.py "$1"
