@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14.0)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(MasteryLab VERSION 0.1.0 LANGUAGES C CXX)
@@ -8,7 +8,7 @@ project(MasteryLab VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
-add_subdirectory(leetcode-v2)
+add_subdirectory(leetcode)
 
 file(WRITE null.cpp "")
 add_library(MasteryLab null.cpp)
