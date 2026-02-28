@@ -8,7 +8,7 @@ project(MasteryLab VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
-add_subdirectory(leetcode)
+add_subdirectory(leetcode-v2)
 
 file(WRITE null.cpp "")
 add_library(MasteryLab null.cpp)

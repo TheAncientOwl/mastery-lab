@@ -1,5 +1,8 @@
 .vscode/
+.tmp
+.venv
 __pycache__/
 build/
 
 null.cpp
+.DS_Store
