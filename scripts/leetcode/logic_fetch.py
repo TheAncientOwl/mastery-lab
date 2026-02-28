@@ -117,5 +117,14 @@ if __name__ == "__main__":
 
     with open(f"leetcode-v2/{slug}/Solution.cpp", "w", encoding="utf-8") as f:
         f.write(problem.code_snippet)
+        f.write(
+            """
+int main()
+{
+    // TODO: tests
+    return 0;
+}
+"""
+        )
 
     print(f"✅ {problem_name} saved to leetcode-v2/{slug}")
