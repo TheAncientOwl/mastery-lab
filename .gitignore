@@ -6,3 +6,6 @@ build/
 
 null.cpp
 .DS_Store
+
+fetch.sh
+run.sh
