@@ -57,6 +57,9 @@ fi
   echo ">> Program exited with failure."
   exit 1
 }
+
+rm -rf $BUILD_DIR
+
 echo "---------------------------------"
 echo ">> Done."
 echo "---------------------------------"
