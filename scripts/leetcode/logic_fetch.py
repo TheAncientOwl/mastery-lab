@@ -81,6 +81,7 @@ def get_problem(title_slug) -> Problem:
 
     includes = []
     containers = [
+        "string",
         "vector",
         "list",
         "deque",
