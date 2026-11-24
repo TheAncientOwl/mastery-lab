@@ -3,6 +3,11 @@ if(NOT TARGET GTest::gtest_main)
 endif()
 
 if(NOT TARGET GTest::gtest_main)
+    if(NOT DEFINED FETCHCONTENT_BASE_DIR OR
+       FETCHCONTENT_BASE_DIR STREQUAL "${CMAKE_BINARY_DIR}/_deps")
+        set(FETCHCONTENT_BASE_DIR "${CMAKE_BINARY_DIR}/_deps-${CMAKE_GENERATOR}")
+    endif()
+
     include(FetchContent)
     FetchContent_Declare(
         googletest
