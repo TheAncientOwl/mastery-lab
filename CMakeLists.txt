@@ -8,6 +8,8 @@ project(MasteryLab VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
+include(cmake/GoogleTest.cmake)
+
 add_subdirectory(leetcode)
 
 file(WRITE null.cpp "")

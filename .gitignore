@@ -1,11 +1,9 @@
 .vscode/
 .tmp
 .venv
+.cache
 __pycache__/
 build/
 
 null.cpp
 .DS_Store
-
-fetch.sh
-run.sh
