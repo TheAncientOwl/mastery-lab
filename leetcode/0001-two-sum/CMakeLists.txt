@@ -13,7 +13,7 @@ add_executable(0001_two_sum
     Solution.cpp
 )
 
-target_link_libraries(0001_two_sum PRIVATE GTest::gtest_main)
+target_link_libraries(0001_two_sum PRIVATE GTest::gtest_main leetcode_common)
 
 include(GoogleTest)
 gtest_discover_tests(0001_two_sum)

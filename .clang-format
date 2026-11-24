@@ -1,7 +1,7 @@
 ---
 BasedOnStyle: Google
 
-Standard: Cpp11
+Standard: c++11
 Cpp11BracedListStyle: true
 ColumnLimit: 100
 IndentWidth: 4
@@ -21,20 +21,20 @@ SpacesBeforeTrailingComments: 1
 
 BreakConstructorInitializersBeforeComma: true
 BreakBeforeInheritanceComma: true
-AlwaysBreakTemplateDeclarations: true
+AlwaysBreakTemplateDeclarations: "Yes"
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
 AllowShortFunctionsOnASingleLine: InlineOnly
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 BinPackArguments: false
-BinPackParameters: false
+BinPackParameters: BinPack
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterClass: true
-  AfterControlStatement: true
+  AfterControlStatement: Always
   AfterEnum: true
   AfterFunction: true
   AfterNamespace: false

@@ -375,7 +375,7 @@ if __name__ == "__main__":
         f.write(problem.readme)
 
     with open(f"{folder_name}/Solution.cpp", "w", encoding="utf-8") as f:
-        f.write("#include <gtest/gtest.h>\n\n")
+        f.write('#include "testing.hpp" // IWYU pragma: keep\n\n')
         f.write(problem.code_snippet)
         f.write("\n\n")
         f.write(problem.unit_tests)
@@ -399,7 +399,7 @@ add_executable({cmake_slug}
     Solution.cpp
 )
 
-target_link_libraries({cmake_slug} PRIVATE GTest::gtest_main)
+target_link_libraries({cmake_slug} PRIVATE GTest::gtest_main leetcode_common)
 
 include(GoogleTest)
 gtest_discover_tests({cmake_slug})
