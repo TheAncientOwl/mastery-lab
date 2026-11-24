@@ -5,29 +5,35 @@
 class Solution
 {
 public:
-    std::vector<int> twoSum(std::vector<int> const& nums, int target) { return {}; }
+    std::vector<int> twoSum(std::vector<int>& nums, int target) {}
 };
 
-TEST(TwoSum, FirstExample)
+TEST(TwoSum, Example1)
 {
-    std::vector<int> const nums{2, 7, 11, 15};
-    auto actual = Solution{}.twoSum(nums, 9);
-    std::vector<int> const expected{0, 1};
+    auto input_nums = std::vector<int>{2, 7, 11, 15};
+    auto input_target = 9;
+
+    auto expected = std::vector<int>{0, 1};
+    auto actual = Solution{}.twoSum(input_nums, input_target);
     EXPECT_EQ(actual, expected);
 }
 
-TEST(TwoSum, SecondExample)
+TEST(TwoSum, Example2)
 {
-    std::vector<int> const nums{3, 2, 4};
-    auto actual = Solution{}.twoSum(nums, 6);
-    std::vector<int> const expected{1, 2};
+    auto input_nums = std::vector<int>{3, 2, 4};
+    auto input_target = 6;
+
+    auto expected = std::vector<int>{1, 2};
+    auto actual = Solution{}.twoSum(input_nums, input_target);
     EXPECT_EQ(actual, expected);
 }
 
-TEST(TwoSum, RepeatedValues)
+TEST(TwoSum, Example3)
 {
-    std::vector<int> const nums{3, 3};
-    auto actual = Solution{}.twoSum(nums, 6);
-    std::vector<int> const expected{0, 1};
+    auto input_nums = std::vector<int>{3, 3};
+    auto input_target = 6;
+
+    auto expected = std::vector<int>{0, 1};
+    auto actual = Solution{}.twoSum(input_nums, input_target);
     EXPECT_EQ(actual, expected);
 }

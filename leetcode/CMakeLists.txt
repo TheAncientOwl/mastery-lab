@@ -1,1 +1,6 @@
 add_subdirectory(0001-two-sum)
+add_subdirectory(0009-palindrome-number)
+
+add_subdirectory(0013-roman-to-integer)
+
+add_subdirectory(0014-longest-common-prefix)
