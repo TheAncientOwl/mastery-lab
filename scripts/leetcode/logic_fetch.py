@@ -62,7 +62,7 @@ def _extract_expected_outputs(content: str) -> list[str]:
     )
     for section in sections[1:]:
         match = re.search(
-            r"Output\s*:\s*(.*?)(?=\s*Explanation\s*:|$)",
+            r"Output\s*:\s*(.*?)(?=\s*(?:Explanation|Constraints)\s*:|$)",
             section,
             flags=re.IGNORECASE | re.DOTALL,
         )

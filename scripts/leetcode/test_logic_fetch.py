@@ -60,6 +60,25 @@ public:
         self.assertIn("auto expected = true;", tests)
         self.assertIn("auto expected = false;", tests)
 
+    def test_stops_example_output_before_constraints(self):
+        code = """
+class Solution {
+public:
+    bool isValid(std::string s) {
+        return false;
+    }
+};
+"""
+        content = """
+<pre><strong>Example 1:</strong><br><strong>Input:</strong> s = "()"<br><strong>Output:</strong> true<br><strong>Explanation:</strong> valid</pre>
+<pre><strong>Example 2:</strong><br><strong>Input:</strong> s = "(]"<br><strong>Output:</strong> false<br><br><br><br><br><br>&nbsp;<br><br><br> Constraints: <br><br><br>1 &lt;= s.length &lt;= 104</pre>
+"""
+
+        tests = generate_unit_tests(code, '"()"\n"(]"', content)
+
+        self.assertIn("auto expected = true;", tests)
+        self.assertIn("auto expected = false;", tests)
+
     def test_generates_assertion_for_in_place_vector_output(self):
         code = """
 class Solution {
