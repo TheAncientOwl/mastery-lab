@@ -10,3 +10,5 @@ add_subdirectory(0014-longest-common-prefix)
 add_subdirectory(0020-valid-parentheses)
 
 add_subdirectory(0021-merge-two-sorted-lists)
+
+add_subdirectory(0026-remove-duplicates-from-sorted-array)
