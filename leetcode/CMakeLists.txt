@@ -8,3 +8,5 @@ add_subdirectory(0013-roman-to-integer)
 add_subdirectory(0014-longest-common-prefix)
 
 add_subdirectory(0020-valid-parentheses)
+
+add_subdirectory(0021-merge-two-sorted-lists)

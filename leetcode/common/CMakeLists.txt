@@ -7,6 +7,7 @@ target_include_directories(leetcode_common
 
 add_executable(leetcode_common_tests
     operators_test.cpp
+    list_node_test_utils_test.cpp
 )
 
 target_link_libraries(leetcode_common_tests

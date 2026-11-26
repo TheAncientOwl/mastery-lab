@@ -1,6 +1,13 @@
 import unittest
+import tempfile
+from pathlib import Path
 
-from logic_fetch import extract_problem_name, generate_unit_tests
+from logic_fetch import (
+    _ensure_output_directory,
+    _prepare_cpp_snippet,
+    extract_problem_name,
+    generate_unit_tests,
+)
 
 
 class GenerateUnitTestsTests(unittest.TestCase):
@@ -9,6 +16,52 @@ class GenerateUnitTestsTests(unittest.TestCase):
             extract_problem_name("https://leetcode.com/problems/two-sum/description/"),
             "two-sum",
         )
+
+    def test_prepares_container_types_without_rewriting_identifiers(self):
+        snippet = _prepare_cpp_snippet("std::vector<int> list1; std::list<int> list2;")
+
+        self.assertIn("#include <vector>", snippet)
+        self.assertIn("#include <list>", snippet)
+        self.assertIn("std::vector<int> list1;", snippet)
+        self.assertIn("std::list<int> list2;", snippet)
+        self.assertNotIn("std::list1", snippet)
+        self.assertNotIn("std::std::", snippet)
+
+    def test_prepares_commented_listnode_stub_from_leetcode(self):
+        snippet = _prepare_cpp_snippet(
+            """
+/**
+ * Definition for singly-linked list.
+ * struct ListNode { int val; ListNode *next; };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        return list1;
+    }
+};
+"""
+        )
+
+        self.assertIn('#include "ListNode.hpp"', snippet)
+        self.assertIn("Definition for singly-linked list.", snippet)
+        self.assertNotIn("#include <list>", snippet)
+        self.assertNotIn("std::list", snippet)
+
+    def test_existing_problem_directory_requires_explicit_force(self):
+        with tempfile.TemporaryDirectory() as directory:
+            problem_directory = Path(directory) / "problem"
+            problem_directory.mkdir()
+            solution = problem_directory / "Solution.cpp"
+            solution.write_text("existing solution", encoding="utf-8")
+
+            with self.assertRaisesRegex(FileExistsError, "--force"):
+                _ensure_output_directory(str(problem_directory), False)
+
+            _ensure_output_directory(str(problem_directory), True)
+            self.assertEqual(
+                solution.read_text(encoding="utf-8"), "existing solution"
+            )
 
     def test_generates_tests_from_vector_and_scalar_examples(self):
         code = """
@@ -99,6 +152,32 @@ public:
         self.assertIn("auto expected = std::vector<int>{1, 2};", tests)
         self.assertIn("EXPECT_EQ(input_nums, expected);", tests)
 
+    def test_generates_return_and_mutated_vector_prefix_assertions(self):
+        code = """
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        return 0;
+    }
+};
+"""
+        content = """
+<pre><strong>Example 1:</strong><br><strong>Input:</strong> nums = [1,1,2]<br><strong>Output:</strong> 2, nums = [1,2,_]<br><strong>Explanation:</strong> only the first two values matter</pre>
+"""
+
+        tests = generate_unit_tests(
+            _prepare_cpp_snippet(code),
+            "[1,1,2]",
+            content,
+            "Remove Duplicates from Sorted Array",
+        )
+
+        self.assertIn("auto expected = 2;", tests)
+        self.assertIn("EXPECT_EQ(actual, expected);", tests)
+        self.assertIn("auto expected_nums = std::vector<int>{1, 2};", tests)
+        self.assertIn("ASSERT_GE(input_nums.size(), expected_nums.size());", tests)
+        self.assertIn("EXPECT_EQ(actual_nums_prefix, expected_nums);", tests)
+
     def test_generates_nested_vector_of_strings(self):
         code = """
 class Solution {
@@ -140,21 +219,47 @@ public:
         with self.assertRaisesRegex(ValueError, "match LeetCode example inputs"):
             generate_unit_tests(code, "", content)
 
-    def test_reports_unsupported_linked_list_cases(self):
+    def test_generates_tests_for_linked_list_examples(self):
         code = """
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode* next) : val(x), next(next) {}
+};
+
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        return head;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        return list1;
     }
 };
 """
         content = """
-<pre><strong>Example 1:</strong><br><strong>Input:</strong> head = [1,2]<br><strong>Output:</strong> [2,1]</pre>
+<pre><strong>Example 1:</strong><br><strong>Input:</strong> list1 = [1,2,4], list2 = [1,3,4]<br><strong>Output:</strong> [1,1,2,3,4,4]</pre>
+<pre><strong>Example 2:</strong><br><strong>Input:</strong> list1 = [], list2 = []<br><strong>Output:</strong> []</pre>
 """
 
-        with self.assertRaisesRegex(ValueError, "Unsupported C\\+\\+ test value type"):
-            generate_unit_tests(code, "[1,2]", content)
+        snippet = _prepare_cpp_snippet(code)
+        tests = generate_unit_tests(
+            snippet,
+            "[1,2,4]\n[1,3,4]\n[]\n[]",
+            content,
+            "Merge Two Sorted Lists",
+        )
+
+        self.assertNotIn('#include "ListNode.hpp"', snippet)
+        self.assertIn("ListNode* list1", snippet)
+        self.assertIn("ListNode* list2", snippet)
+        self.assertIn("TEST(MergeTwoSortedLists, Example1)", tests)
+        self.assertIn("ListNodeTestUtils::Arena<ListNode> list_nodes;", tests)
+        self.assertIn("list_nodes.make_list({1, 2, 4})", tests)
+        self.assertIn("list_nodes.make_list({})", tests)
+        self.assertIn("list_nodes.track(actual);", tests)
+        self.assertIn("list_nodes.values(actual), expected", tests)
+        self.assertIn("std::vector<int>{1, 1, 2, 3, 4, 4}", tests)
+        self.assertIn("std::vector<int>{}", tests)
 
 
 if __name__ == "__main__":
